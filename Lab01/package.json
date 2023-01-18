@@ -1,0 +1,16 @@
+{
+  "name": "lab01_101358069_comp3133",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Noor Said",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "nodemon": "^2.0.20"
+  }
+}
