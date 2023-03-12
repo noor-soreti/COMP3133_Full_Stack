@@ -32,6 +32,11 @@ app.get("/", (req,res) => {
   res.sendFile(__dirname + "/app/index.html");
 })
 
+app.post("/", (req, res) => {
+  console.log("he");
+  res.send("hey")
+})
+
 // socket.io connection
 
 
