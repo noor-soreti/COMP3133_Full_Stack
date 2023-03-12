@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const restaurantRouter = require('./routes/RestaurantRoutes.js');
 
+const PORT = 5000
 const app = express();
 app.use(express.json()); // Make sure it comes back as json
 
@@ -22,4 +23,4 @@ mongoose.connect('mongodb+srv://sa:TXEt5Ngiu7WVcU9P@cluster0.r8uhczt.mongodb.net
 
 app.use(restaurantRouter);
 
-app.listen(3000, () => { console.log('Server is running on port 3000') });
+app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`) });

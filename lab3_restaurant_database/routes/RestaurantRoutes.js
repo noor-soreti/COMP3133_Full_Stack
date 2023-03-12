@@ -35,8 +35,6 @@ app.get("/restaurants", async (req, res) => {
         }
     }
 
-
-
 })
 
 // Details by cuisine
@@ -68,6 +66,10 @@ app.get("/restaurants/Delicatessen", async (req, res) => {
     }
 
 
+})
+
+app.post("/posting", async (req, res) => {
+    res.status(404).send("not found")
 })
 
 
