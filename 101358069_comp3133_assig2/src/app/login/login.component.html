@@ -1,0 +1,25 @@
+<div class="container py-5">
+    <div class="row col card p-3 mb-5">
+<form  (ngSubmit)="onSubmit()" #exampleForm="ngForm" >
+      <div class="form-group">
+        <label for="emailInput" class="form-label mt-4">Email address</label>
+        <input type="email" class="form-control" id="emailInput"  placeholder="Enter email" [(ngModel)]="username" name="username" required>
+
+      </div>
+
+      <div class="form-group">
+        <label for="passwordInput" class="form-label mt-4">Password</label>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Password" [(ngModel)]="password" name="password" required >
+      </div>
+
+      <div *ngIf="message != ''" class="form-group text-danger">
+        {{message}}
+      </div>
+
+      <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary" [disabled]="!exampleForm.valid">Submit</button>
+        <a routerLink="/register" routerLinkActive="active" type="button" class="btn btn-link">Register</a>
+      </div>
+</form>
+</div>
+</div>
