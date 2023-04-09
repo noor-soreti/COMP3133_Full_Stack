@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
+import { ModalComponent } from '../modal/modal.component';
+import { MatDialog } from "@angular/material/dialog";
+import { Employee } from '../classes/employee.class';
+import { EmployeeDataService } from '../employee-data.service';
 
-const CREATE_EMPLOYEE = gql`mutation($input: EmployeeInput!){
-  createEmployee(input: $input) {
-    firstname
-  }
-}`
 
 @Component({
   selector: 'app-create',
@@ -14,30 +12,24 @@ const CREATE_EMPLOYEE = gql`mutation($input: EmployeeInput!){
 })
 export class CreateComponent {
 
-  constructor(private apollo: Apollo) {}
+  constructor(private dataService: EmployeeDataService,  public dialog: MatDialog) {}
 
-  firstname = ""
-  lastname = ""
-  email = ""
-  gender = ""
-  salary = 0.0
-
+  employee = new Employee("","","","",0)
+  message?: string
 
   onSubmit() {
-    this.apollo.mutate({
-      mutation: CREATE_EMPLOYEE,
-      variables: {
-        input: {
-          firstname: this.firstname,
-          lastname: this.lastname,
-          email: this.email,
-          gender: this.gender.toLowerCase,
-          salary: this.salary
-        }
-      }
-    }).subscribe((results: any) => {
-      console.log(results.data);
-      
+    this.dataService.createEmployee(this.employee).subscribe((results: any) => {
+      if (results) {
+        this.openDialog()
+        this.message = ""
+      }       
     })
   }
+
+  openDialog(): void {
+    this.dialog.open(ModalComponent, {
+      data: {title: "Created new employee!", textContent: "You will be redirected to home page", nav: "/session/home"}
+    })
+  }
+
 }

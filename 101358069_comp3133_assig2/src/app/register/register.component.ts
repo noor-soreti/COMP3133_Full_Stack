@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from "@angular/material/dialog";
 import { Apollo, gql } from 'apollo-angular';
+import { ModalComponent } from '../modal/modal.component';
 
 const SIGNUP_MUTATE = gql`
 mutation($username: String!, $email: String!, $password: String!){
@@ -16,14 +17,17 @@ mutation($username: String!, $email: String!, $password: String!){
 })
 export class RegisterComponent {
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, public dialog: MatDialog) {}
 
   username = ""
   password = ""
   email = ""
   message = ""
+  title?: string;
+
 
   onSubmit() {
+    this.message = "Username or email already in use"
     this.apollo.mutate({
       mutation: SIGNUP_MUTATE,
       variables: {
@@ -33,12 +37,15 @@ export class RegisterComponent {
       }
     }).subscribe((result: any) => {
       if (result) {
-        console.log("yes");
+        this.message = ""
+        this.openDialog()
       } 
     })
-    this.message = "Username or email already in use"
-
   }
 
-  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {title: "Success!", textContent: "You will be redirected to login page", nav: '/', btnString: "Continue"}
+    })
+  }
 }

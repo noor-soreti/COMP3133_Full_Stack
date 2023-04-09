@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 const POST_LOGIN = gql`query($username: String!, $password: String!){
   login(username: $username, password: $password) {
@@ -47,7 +47,6 @@ export class LoginComponent {
       }
     })       
   }
-
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

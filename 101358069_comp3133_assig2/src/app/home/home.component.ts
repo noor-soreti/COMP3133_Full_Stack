@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-
-const GET_EMPLOYEES = gql`query{
-  getAllEmployees {
-    firstname,lastname, email, _id
-  }
-}`
+import { EmployeeDataService } from '../employee-data.service';
+import { subscribe } from 'graphql';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +10,12 @@ const GET_EMPLOYEES = gql`query{
 })
 export class HomeComponent {
 
-  constructor(private apollo: Apollo) {}
-  employees = []
+  constructor(private dataServie: EmployeeDataService) {}
+  employees  = []
 
   ngOnInit() {
-    this.apollo.query({
-      query: GET_EMPLOYEES
-    }).subscribe((result: any) => {
-      this.employees = result.data.getAllEmployees      
+    this.dataServie.getAllEmployees().subscribe((result: any) => {
+      this.employees = result.data.getAllEmployees
     })
   }
 }

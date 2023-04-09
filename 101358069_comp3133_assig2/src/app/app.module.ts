@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +20,8 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component';
 import { ViewComponent } from './view/view.component';
+import { ModalComponent } from './modal/modal.component';
+import { EmployeeDataService } from './employee-data.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -23,9 +29,9 @@ const routes: Routes = [
   {path: 'session', children: [
     { path: 'home', component: HomeComponent},
     { path: 'add', component: CreateComponent},
-    { path: 'update', component: UpdateComponent},
-    { path: 'delete', component: DeleteComponent},
-    { path: 'view', component: ViewComponent}
+    { path: 'update/:id', component: UpdateComponent},
+    { path: 'delete/:id', component: DeleteComponent},
+    { path: 'view/:id', component: ViewComponent}
   ]}
 ]
 
@@ -40,9 +46,11 @@ const routes: Routes = [
     CreateComponent,
     UpdateComponent,
     DeleteComponent,
-    ViewComponent
+    ViewComponent,
+    ModalComponent
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     GraphQLModule,
@@ -51,7 +59,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [EmployeeDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

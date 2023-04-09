@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+
+<div mat-dialog-content>
+  {{data.textContent}}
+
+  <div mat-dialog-actions class="modal-footer">
+    <button mat-button (click)="onClick()" type="button" class="btn btn-danger" data-bs-dismiss="modal" >{{data.btnString}}</button>
+    <button *ngIf="data.btnString=='Logout'" class="btn btn-secondary" mat-button mat-dialog-close>Cancel</button>
+
+  </div>
+</div> 
+
